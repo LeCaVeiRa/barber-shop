@@ -18,6 +18,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { YesNoDialogComponent } from '../../commons/components/yes-no-dialog/yes-no-dialog.component';
 import { Subscription } from 'rxjs';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -37,6 +38,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './schedule-calendar.component.html',
   styleUrl: './schedule-calendar.component.scss',
   providers:[
+    provideNativeDateAdapter(),
     {provide:SERVICES_TOKEN.DIALOG,useClass: DialogManagerService}
   ]
 })
@@ -131,6 +133,7 @@ export class ScheduleCalendarComponent implements AfterViewInit, OnChanges, OnIn
       clientId: this.newSchedule.clientId!,
       clientName: this.client.find(c => c.id === this.newSchedule.clientId!)!.name
     }
+    this.monthSchedule.scheduleAppointments.push(saved)
     this.onScheduleClient.emit(saved)
     this.buildTable()
     form.resetForm()
@@ -146,7 +149,7 @@ export class ScheduleCalendarComponent implements AfterViewInit, OnChanges, OnIn
   private buildTable(){
     const appointments = this.monthSchedule.scheduleAppointments.filter(a => 
       this.monthSchedule.year === this._selected.getFullYear() &&
-      this.monthSchedule.month === this._selected.getMonth() &&
+      this.monthSchedule.month -1 === this._selected.getMonth() &&
       a.day === this._selected.getDate()
     )
     this.dataSource = new MatTableDataSource<ClientScheduleAppointmentModel>(appointments)
