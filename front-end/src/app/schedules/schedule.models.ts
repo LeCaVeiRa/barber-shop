@@ -1,10 +1,10 @@
-export interface ScheduleAppointmentMonthModel{
+export interface ScheduleAppointementMonthModel {
     year: number
     month: number
-    scheduleAppointments: ClientScheduleAppointmentModel[]
+    scheduledAppointments: ClientScheduleAppointmentModel[]
 }
 
-export interface ClientScheduleAppointmentModel{
+export interface ClientScheduleAppointmentModel {
     id: number
     day: number
     startAt: Date
@@ -13,13 +13,13 @@ export interface ClientScheduleAppointmentModel{
     clientName: string
 }
 
-export interface SaveScheduleModel{
+export interface SaveScheduleModel {
     startAt?: Date
     endAt?: Date
     clientId?: number
 }
 
-export interface SelectClientModel{
-    id: number,
-    name:string
+export interface SelectClientModel {
+    id: number
+    name: string
 }

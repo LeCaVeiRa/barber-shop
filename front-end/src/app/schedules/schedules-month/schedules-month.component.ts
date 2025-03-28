@@ -8,7 +8,7 @@ import { ClientsService } from '../../services/api-client/clients/clients.servic
 import { SchedulesService } from '../../services/api-client/schedules/schedules.service';
 import { SnackbarManagerService } from '../../services/snackbar-manager.service';
 import { Subscription } from 'rxjs';
-import { ClientScheduleAppointmentModel, SaveScheduleModel, ScheduleAppointmentMonthModel, SelectClientModel } from '../schedule.models';
+import { ClientScheduleAppointmentModel, SaveScheduleModel, ScheduleAppointementMonthModel, SelectClientModel } from '../schedule.models';
 import { SaveScheduleRequest } from '../../services/api-client/schedules/schedules.models';
 
 @Component({
@@ -27,7 +27,7 @@ export class SchedulesMonthComponent implements OnInit, OnDestroy{
   private subscriptions!: Subscription[];
   private selectedDate?: Date
 
-  monthSchedule!: ScheduleAppointmentMonthModel
+  monthSchedule!: ScheduleAppointementMonthModel
   clients: SelectClientModel[] = []
 
   constructor(

@@ -2,7 +2,7 @@
 export interface ScheduleAppointmentMonthResponse{
     year: number
     month: number
-    scheduleAppointments: ClientScheduleAppointmentResponse[]
+    scheduledAppointments: ClientScheduleAppointmentResponse[]
 }
 
 export interface ClientScheduleAppointmentResponse{
@@ -11,7 +11,7 @@ export interface ClientScheduleAppointmentResponse{
     startAt: Date
     endAt: Date
     clientId: number
-    ClientName: string
+    clientName: string
 }
 
 export interface SaveScheduleResponse{

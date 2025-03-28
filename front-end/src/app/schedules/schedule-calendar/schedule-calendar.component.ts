@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges, OnIni
 import { SERVICES_TOKEN } from '../../services/token.service';
 import { DialogManagerService } from '../../services/dialog-manager.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ClientScheduleAppointmentModel, SaveScheduleModel, ScheduleAppointmentMonthModel, SelectClientModel } from '../schedule.models';
+import { ClientScheduleAppointmentModel, SaveScheduleModel, ScheduleAppointementMonthModel, SelectClientModel } from '../schedule.models';
 import { FormControl, FormsModule, NgForm } from '@angular/forms';
 import { IDialogManagerService } from '../../services/idialog-manager.service';
 import { CommonModule } from '@angular/common';
@@ -58,7 +58,7 @@ export class ScheduleCalendarComponent implements AfterViewInit, OnChanges, OnIn
 
   clientSelectFOrmControl = new FormControl()
 
-  @Input() monthSchedule!: ScheduleAppointmentMonthModel
+  @Input() monthSchedule!: ScheduleAppointementMonthModel
   @Input() client:SelectClientModel[] = []
 
   @Output() onDateChange = new EventEmitter<Date>()
@@ -133,7 +133,7 @@ export class ScheduleCalendarComponent implements AfterViewInit, OnChanges, OnIn
       clientId: this.newSchedule.clientId!,
       clientName: this.client.find(c => c.id === this.newSchedule.clientId!)!.name
     }
-    this.monthSchedule.scheduleAppointments.push(saved)
+    this.monthSchedule.scheduledAppointments.push(saved)
     this.onScheduleClient.emit(saved)
     this.buildTable()
     form.resetForm()
@@ -147,7 +147,7 @@ export class ScheduleCalendarComponent implements AfterViewInit, OnChanges, OnIn
   }
 
   private buildTable(){
-    const appointments = this.monthSchedule.scheduleAppointments.filter(a => 
+    const appointments = this.monthSchedule.scheduledAppointments.filter(a => 
       this.monthSchedule.year === this._selected.getFullYear() &&
       this.monthSchedule.month -1 === this._selected.getMonth() &&
       a.day === this._selected.getDate()
